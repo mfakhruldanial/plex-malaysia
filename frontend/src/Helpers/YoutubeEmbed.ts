@@ -1,1 +1,0 @@
-export const ytLink = "https://www.youtube.com/embed"
