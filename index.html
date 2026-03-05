@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plex Malaysia - Movie Catalog</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Vercel Web Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">PLEX MALAYSIA</div>
+    <input id="search" placeholder="Search movies..." />
+</div>
+
+<div class="row">
+    <h2>Movies & Series</h2>
+    <div class="movie-row" id="movieRow"></div>
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-content" id="popupContent">
+        <span onclick="closePopup()" style="float:right; cursor:pointer; font-size:24px;">&times;</span>
+        <div id="details"></div>
+    </div>
+</div>
+
+<script>
+// Display movie function
+function displayMovie(movie) {
+    const movieEl = document.createElement('div');
+    movieEl.className = 'movie';
+    movieEl.innerHTML = `<img src="${movie.poster}" alt="${movie.title}">`;
+    movieEl.onclick = () => showDetails(movie);
+    document.getElementById('movieRow').appendChild(movieEl);
+}
+
+// Show movie details in popup
+function showDetails(movie) {
+    document.getElementById('details').innerHTML = `
+        <img src="${movie.poster}" alt="${movie.title}">
+        <h2>${movie.title}</h2>
+        <p>${movie.year || 'Year not available'}</p>
+    `;
+    document.getElementById('popup').style.display = 'block';
+}
+
+// Close popup
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+// Close popup when clicking outside
+window.onclick = function(event) {
+    const popup = document.getElementById('popup');
+    if (event.target === popup) {
+        popup.style.display = 'none';
+    }
+}
+
+// Search functionality
+document.getElementById('search').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const movies = document.querySelectorAll('.movie');
+    
+    movies.forEach(movie => {
+        const title = movie.querySelector('img').alt.toLowerCase();
+        if (title.includes(searchTerm)) {
+            movie.style.display = 'block';
+        } else {
+            movie.style.display = 'none';
+        }
+    });
+});
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
