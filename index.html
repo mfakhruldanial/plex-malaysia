@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Plex Malaysia Catalog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1>Plex Malaysia</h1>
+<input type="text" id="search" placeholder="Search movie...">
+</header>
+
+<nav>
+<button onclick="filterCategory('all')">All</button>
+<button onclick="filterCategory('movie')">Movies</button>
+<button onclick="filterCategory('series')">Series</button>
+<button onclick="filterCategory('anime')">Anime</button>
+<button onclick="filterCategory('4k')">4K</button>
+</nav>
+
+<div id="catalog"></div>
+
+<div id="popup" class="popup">
+<div class="popup-content">
+<span id="close">&times;</span>
+<img id="popupPoster">
+<h2 id="popupTitle"></h2>
+<p id="popupInfo"></p>
+</div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
